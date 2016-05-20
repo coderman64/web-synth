@@ -70,9 +70,8 @@ canvas.addEventListener("mousemove",function(evt){
     }; 
     cont.innerHTML = "Key No. "+(Math.floor(mouseLoc.y/10)+30).toString();
     if(mouseDown){
-        //c.lineTo(mouseLoc.x,mouseLoc.y);
-        //c.stroke();
-        
+        notes[notes.length-1].length = mouseLoc.x-notes[notes.length-1].time;
+        notes[notes.length-1].draw();
     }
 });
 
