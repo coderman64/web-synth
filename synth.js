@@ -1,3 +1,5 @@
+var myVar = window.setInterval(redraw , 20);
+
 var getFreq = function(keyNumber){
     return Math.pow(2,((keyNumber-49)/12))*440;
 }
