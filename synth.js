@@ -23,6 +23,7 @@ var note = function(key, time, length){
     this.key = key;
     this.time = time;
     this.length = length;
+    this.osc = null;
 }
 note.prototype.draw = function(){
     //(key-30)*10
@@ -43,6 +44,17 @@ function redraw(){
     }
     for(var i = 0; i < notes.length; i++){
         notes[i].draw();
+        if(play>notes[i].time&&play<notes[i].time+6){
+            notes[i].osc = context.createOscillator();
+            var frequency = getFreq(notes[i].key);
+            notes[i].osc.frequency.value = frequency;
+            notes[i].osc.type = 'triangle';
+            notes[i].osc.connect(masterVolume);
+            notes[i].osc.start(context.currentTime);
+        }
+        if(play>(notes[i].time+notes[i].length)&&play<(notes[i].time+notes[i].length)+6){
+            notes[i].osc.stop();
+        }
     }
     if(play > 0){
         c.beginPath();
@@ -51,6 +63,9 @@ function redraw(){
         c.moveTo(play,0);
         c.lineTo(play,canvas.height);
         c.stroke();
+        if(play>canvas.width){
+            play = 0;
+        }
     }
 }
 
