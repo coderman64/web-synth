@@ -3,13 +3,13 @@ var getFreq = function(keyNumber){
     return Math.pow(2,((keyNumber-49)/12))*440;
 }
 
-/*var context = new AudioContext(),
+var context = new (window.AudioContext || window.webkitAudioContext)(),
     masterVolume = context.createGain(),
     oscillators = {};
 
 masterVolume.gain.value = 0.2;
 
-masterVolume.connect(context.destination);*/
+masterVolume.connect(context.destination);
 
 var canvas = document.getElementById("mainCanvas");
 var cont = document.getElementById("keyboard");
