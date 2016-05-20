@@ -45,6 +45,7 @@ function redraw(){
         notes[i].draw();
     }
     if(play > 0){
+        c.beginPath();
         play += 5;
         c.strokeStyle = "#FF0000";
         c.moveTo(play,0);
