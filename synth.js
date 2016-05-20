@@ -27,11 +27,12 @@ var notes = [];
 var note = function(key, time, length){
     this.key = key;
     this.time = time;
+    this.length = length;
 }
 note.prototype.draw = function(){
     //(key-30)*10
     c.fillStyle = "#000000";
-    c.fillRect(time,(key-30)*10, length, 10);
+    c.fillRect(this.time,(this.key-30)*10, this.length, 10);
     c.stroke();
 }
 
