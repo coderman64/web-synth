@@ -13,14 +13,6 @@ masterVolume.connect(context.destination);
 var canvas = document.getElementById("mainCanvas");
 var cont = document.getElementById("keyboard");
 var c = canvas.getContext("2d");
-c.fillStyle = "#FF0000";
-//c.fillRect(0,0,150,75);
-c.strokeStyle = "#000000";
-for(var i = 0; i < 20;i++){
-    c.moveTo(0,i*10);
-    c.lineTo(500,i*10);
-    c.stroke();
-}
 
 var notes = [];
 var note = function(key, time, length){
@@ -33,6 +25,20 @@ note.prototype.draw = function(){
     c.fillStyle = "#000000";
     c.fillRect(this.time,(this.key-30)*10, this.length, 10);
     c.stroke();
+}
+
+var redraw = function(){
+    c.fillStyle = "#FFFFFF";
+    c.fillRect(0,0,canvas.width,canvas.height);
+    c.strokeStyle = "#000000";
+    for(var i = 0; i < 20;i++){
+        c.moveTo(0,i*10);
+        c.lineTo(500,i*10);
+        c.stroke();
+    }
+    for(var i = 0; i < notes.length; i++){
+        notes[i].draw();
+    }
 }
 
 var mouseLoc = {
@@ -71,7 +77,7 @@ canvas.addEventListener("mousemove",function(evt){
     cont.innerHTML = "Key No. "+(Math.floor(mouseLoc.y/10)+30).toString();
     if(mouseDown){
         notes[notes.length-1].length = mouseLoc.x-notes[notes.length-1].time;
-        notes[notes.length-1].draw();
+        redraw();
     }
 });
 
