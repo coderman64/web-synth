@@ -29,7 +29,7 @@ note.prototype.draw = function(){
     c.stroke();
 }
 
-var redraw = function(){
+function redraw(){
     c.fillStyle = "#FFFFFF";
     c.fillRect(0,0,canvas.width,canvas.height);
     c.strokeStyle = "#000000";
