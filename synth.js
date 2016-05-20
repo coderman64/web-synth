@@ -1,4 +1,4 @@
-var myVar = window.setInterval(redraw , 20);
+var myVar = window.setInterval(redraw , 100);
 var play = 0;
 var playbutton = document.getElementById("play");
 
