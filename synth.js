@@ -3,7 +3,7 @@ var getFreq = function(keyNumber){
     return Math.pow(2,((keyNumber-49)/12))*440;
 }
 
-var context = new AudioContext(),
+var context = new (window.AudioContext || window.webkitAudioContext)(),
     masterVolume = context.createGain(),
     oscillators = {};
 
