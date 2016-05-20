@@ -45,9 +45,9 @@ canvas.addEventListener("mousedown", function(evt){
     c.moveTo(mouseLoc.x,mouseLoc.y);
     var osc = context.createOscillator();
     var frequency = getFreq(Math.floor(mouseLoc.y/10)+30);
-    c.fillStyle = "#000000";
-    c.fillRect(mouseLoc.x,Math.floor(mouseLoc.y/10)*10,50,10);
-    c.stroke();
+    //c.fillStyle = "#000000";
+    //c.fillRect(mouseLoc.x,Math.floor(mouseLoc.y/10)*10,50,10);
+    //c.stroke();
     notes[notes.length] = new note(Math.floor(mouseLoc.y/10)+30, mouseLoc.x, 10);
     notes[notes.length-1].draw();
     osc.frequency.value = frequency;
