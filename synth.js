@@ -1,4 +1,6 @@
 var myVar = window.setInterval(redraw , 20);
+var play = 0;
+var playbutton = document.getElementById("play");
 
 var getFreq = function(keyNumber){
     return Math.pow(2,((keyNumber-49)/12))*440;
@@ -41,6 +43,13 @@ function redraw(){
     for(var i = 0; i < notes.length; i++){
         notes[i].draw();
     }
+    if(play > 0){
+        play += 5;
+        c.strokeStyle = "#FF0000";
+        c.moveTo(play,0);
+        c.lineTo(play,canvas.height);
+        c.stroke();
+    }
 }
 
 var mouseLoc = {
@@ -82,6 +91,10 @@ canvas.addEventListener("mousemove",function(evt){
             notes[notes.length-1].length = mouseLoc.x-notes[notes.length-1].time;
         }
     }
+});
+
+playbutton.addEventListener("click",function(){
+    play = 1;
 });
 
 /*keyboard.keyDown = function (note, frequency) {
