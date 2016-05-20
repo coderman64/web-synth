@@ -76,6 +76,7 @@ var mouseLoc = {
 var mouseDown = false;
 canvas.addEventListener("mousedown", function(evt){
     mouseDown = true;
+    if(evt.button === left){
     c.moveTo(mouseLoc.x,mouseLoc.y);
     var osc = context.createOscillator();
     var frequency = getFreq(Math.floor(mouseLoc.y/10)+30);
@@ -90,6 +91,7 @@ canvas.addEventListener("mousedown", function(evt){
     oscillators[frequency] = [osc];
     osc.start(context.currentTime);
     osc.stop(context.currentTime+0.2);
+    }
 });
 
 canvas.addEventListener("mouseup", function(evt){
@@ -111,7 +113,13 @@ canvas.addEventListener("mousemove",function(evt){
 });
 
 playbutton.addEventListener("click",function(){
-    play = 1;
+    if(play>0){
+        play = 0;
+        playbutton.innerHTML = "play!";
+    }else{
+        play = 1;
+        playbutton.innerHTML = "stop!";
+    }
 });
 
 /*keyboard.keyDown = function (note, frequency) {
