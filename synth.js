@@ -65,6 +65,7 @@ function redraw(){
         c.stroke();
         if(play>canvas.width){
             play = 0;
+            playbutton.innerHTML = "Play!"
         }
     }
 }
@@ -76,7 +77,7 @@ var mouseLoc = {
 var mouseDown = false;
 canvas.addEventListener("mousedown", function(evt){
     mouseDown = true;
-    if(evt.button === 1){
+    if(evt.button === 0){
     c.moveTo(mouseLoc.x,mouseLoc.y);
     var osc = context.createOscillator();
     var frequency = getFreq(Math.floor(mouseLoc.y/10)+30);
@@ -115,10 +116,10 @@ canvas.addEventListener("mousemove",function(evt){
 playbutton.addEventListener("click",function(){
     if(play>0){
         play = 0;
-        playbutton.innerHTML = "play!";
+        playbutton.innerHTML = "Play!";
     }else{
         play = 1;
-        playbutton.innerHTML = "stop!";
+        playbutton.innerHTML = "Stop!";
     }
 });
 
