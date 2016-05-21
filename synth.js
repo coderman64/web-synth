@@ -17,6 +17,7 @@ masterVolume.connect(context.destination);
 var canvas = document.getElementById("mainCanvas");
 var cont = document.getElementById("keyboard");
 var c = canvas.getContext("2d");
+var rightButton = false;
 
 var notes = [];
 var note = function(key, time, length){
@@ -52,8 +53,13 @@ function redraw(){
             notes[i].osc.connect(masterVolume);
             notes[i].osc.start(context.currentTime);
         }
-        if(play>(notes[i].time+notes[i].length)&&play<(notes[i].time+notes[i].length)+6){
+        if(notes[i].osc&&play>(notes[i].time+notes[i].length)&&play<(notes[i].time+notes[i].length)+6){
             notes[i].osc.stop();
+        }
+        var noteY = (notes[i].key-30)*10
+        if(rightButton&&mouseLoc.x > notes[i].time&&mouseLoc.x<(notes[i].time+notes[i].length)&&mouseLoc.y>noteY&&mouseLoc.y<noteY+10){
+            notes.splice(i,1);
+            i--;
         }
     }
     if(play > 0){
@@ -75,6 +81,7 @@ var mouseLoc = {
        y: 0
     }; 
 var mouseDown = false;
+
 canvas.addEventListener("mousedown", function(evt){
     mouseDown = true;
     if(evt.button === 0){
@@ -89,14 +96,18 @@ canvas.addEventListener("mousedown", function(evt){
     osc.frequency.value = frequency;
     osc.type = 'triangle';
     osc.connect(masterVolume);
-    oscillators[frequency] = [osc];
     osc.start(context.currentTime);
     osc.stop(context.currentTime+0.2);
+    }else if(evt.button == 2){
+        rightButton = true;
     }
 });
 
 canvas.addEventListener("mouseup", function(evt){
     mouseDown = false;
+    if(evt.button == 2){
+        rightButton = true;
+    }
 });
 
 canvas.addEventListener("mousemove",function(evt){
@@ -106,7 +117,7 @@ canvas.addEventListener("mousemove",function(evt){
        y: evt.clientY - rect.top
     }; 
     cont.innerHTML = "Key No. "+(Math.floor(mouseLoc.y/10)+30).toString();
-    if(mouseDown){
+    if(mouseDown && evt.button == 0){
         if(notes[notes.length-1].time<mouseLoc.x){
             notes[notes.length-1].length = mouseLoc.x-notes[notes.length-1].time;
         }
@@ -123,6 +134,9 @@ playbutton.addEventListener("click",function(){
     }
 });
 
+canvas.oncontextmenu = function (e){
+    e.preventDefault();
+}
 /*keyboard.keyDown = function (note, frequency) {
     var osc = context.createOscillator(),
         osc2 = context.createOscillator();
