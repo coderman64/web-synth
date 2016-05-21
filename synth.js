@@ -76,7 +76,7 @@ var mouseLoc = {
 var mouseDown = false;
 canvas.addEventListener("mousedown", function(evt){
     mouseDown = true;
-    if(evt.button === left){
+    if(evt.button === 1){
     c.moveTo(mouseLoc.x,mouseLoc.y);
     var osc = context.createOscillator();
     var frequency = getFreq(Math.floor(mouseLoc.y/10)+30);
