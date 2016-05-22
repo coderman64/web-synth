@@ -105,7 +105,7 @@ canvas.addEventListener("mousedown", function(evt){
 
 canvas.addEventListener("mouseup", function(evt){
     mouseDown = false;
-    if(evt.button == 2){
+    if(evt.button == 2){//if the right button is pressed
         rightButton = true;
     }
 });
@@ -115,11 +115,11 @@ canvas.addEventListener("mousemove",function(evt){
     mouseLoc = {
        x: evt.clientX - rect.left,
        y: evt.clientY - rect.top
-    }; 
+    }; //change the "mouseLoc" variable to reflect the mouse's current position
     cont.innerHTML = "Key No. "+(Math.floor(mouseLoc.y/10)+30).toString();
     if(mouseDown && evt.button == 0){
         if(notes[notes.length-1].time<mouseLoc.x){
-            notes[notes.length-1].length = mouseLoc.x-notes[notes.length-1].time;
+            notes[notes.length-1].length = mouseLoc.x-notes[notes.length-1].time;//allows you to drag out the length of the note
         }
     }
 });
@@ -127,15 +127,15 @@ canvas.addEventListener("mousemove",function(evt){
 playbutton.addEventListener("click",function(){
     if(play>0){
         play = 0;
-        playbutton.innerHTML = "Play!";
+        playbutton.innerHTML = "Play!";//stops playback and changes the button text to "Play!"
     }else{
         play = 1;
-        playbutton.innerHTML = "Stop!";
+        playbutton.innerHTML = "Stop!";//begins playback and changes the button text to "Stop!"
     }
 });
 
 canvas.oncontextmenu = function (e){
-    e.preventDefault();
+    e.preventDefault(); //prevents the canvas from pulling up a menu when right-clicked
 }
 /*keyboard.keyDown = function (note, frequency) {
     var osc = context.createOscillator(),
