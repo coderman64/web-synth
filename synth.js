@@ -53,7 +53,7 @@ function redraw(){
             notes[i].osc.connect(masterVolume);
             notes[i].osc.start(context.currentTime);
         }
-        if(notes[i].osc&&play>(notes[i].time+notes[i].length)&&play<(notes[i].time+notes[i].length)+6){
+        if(notes[i].osc&&((play>(notes[i].time+notes[i].length)&&play<(notes[i].time+notes[i].length)+6)||play == 0)){
             notes[i].osc.stop();
         }
         var noteY = (notes[i].key-30)*10
