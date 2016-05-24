@@ -117,7 +117,7 @@ canvas.addEventListener("mousemove",function(evt){
        y: evt.clientY - rect.top
     }; //change the "mouseLoc" variable to reflect the mouse's current position
     cont.innerHTML = "Key No. "+(Math.floor(mouseLoc.y/10)+30).toString();
-    if(mouseDown && evt.button == 0){
+    if(mouseDown && evt.button == 0&& rightButton == false){
         if(notes[notes.length-1].time<mouseLoc.x){
             notes[notes.length-1].length = mouseLoc.x-notes[notes.length-1].time;//allows you to drag out the length of the note
         }
