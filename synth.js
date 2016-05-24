@@ -106,7 +106,7 @@ canvas.addEventListener("mousedown", function(evt){
 canvas.addEventListener("mouseup", function(evt){
     mouseDown = false;
     if(evt.button == 2){//if the right button is pressed
-        rightButton = true;
+        rightButton = false;
     }
 });
 
