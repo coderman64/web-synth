@@ -19,7 +19,7 @@ windowBar.addEventListener("mouseup",function(){
     dragging = false;
 });
 
-windowBar.addEventListener("mousemove",function(evt){
+document.body.addEventListener("mousemove",function(evt){
     if(dragging){
         windowObj.style.left = (evt.clientX-relativeLoc.x).toString()+"px";
         windowObj.style.top = (evt.clientY+relativeLoc.y).toString()+"px";
