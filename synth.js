@@ -46,6 +46,9 @@ function redraw(){
     for(var i = 0; i < notes.length; i++){
         notes[i].draw();
         if(play>notes[i].time&&play<notes[i].time+6){
+            if(notes[i].osc){
+                notes[i].osc.stop(context.currentTime);
+            }
             notes[i].osc = context.createOscillator();
             var frequency = getFreq(notes[i].key);
             notes[i].osc.frequency.value = frequency;
@@ -53,8 +56,8 @@ function redraw(){
             notes[i].osc.connect(masterVolume);
             notes[i].osc.start(context.currentTime);
         }
-        if(notes[i].osc&&((play>(notes[i].time+notes[i].length)&&play<(notes[i].time+notes[i].length)+6)||play == 0)){
-            notes[i].osc.stop();
+        if(notes[i].osc&&((play>(notes[i].time+notes[i].length)&&play<(notes[i].time+notes[i].length)+6)||play < 1)){
+            notes[i].osc.stop(context.currentTime);
         }
         var noteY = (notes[i].key-30)*10
         if(rightButton&&mouseLoc.x > notes[i].time&&mouseLoc.x<(notes[i].time+notes[i].length)&&mouseLoc.y>noteY&&mouseLoc.y<noteY+10){
@@ -110,7 +113,7 @@ canvas.addEventListener("mouseup", function(evt){
     }
 });
 
-canvas.addEventListener("mousemove",function(evt){
+var moved12 = function(evt){
     var rect = canvas.getBoundingClientRect();
     mouseLoc = {
        x: evt.clientX - rect.left,
@@ -122,7 +125,9 @@ canvas.addEventListener("mousemove",function(evt){
             notes[notes.length-1].length = mouseLoc.x-notes[notes.length-1].time;//allows you to drag out the length of the note
         }
     }
-});
+}
+canvas.addEventListener("mousemove",moved12);
+canvas.addEventListener("touchmove",function(evt){moved12(evt); console.log(evt.type)});
 
 playbutton.addEventListener("click",function(){
     if(play>0){
@@ -133,6 +138,8 @@ playbutton.addEventListener("click",function(){
         playbutton.innerHTML = "Stop!";//begins playback and changes the button text to "Stop!"
     }
 });
+
+
 
 canvas.oncontextmenu = function (e){
     e.preventDefault(); //prevents the canvas from pulling up a menu when right-clicked
