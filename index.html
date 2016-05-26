@@ -7,7 +7,21 @@
     user-scalable=no, initial-scale=1, maximum-scale=1, user-scalable=0" />
         <title>Online Sythesizer</title>
         <style>
-        canvas { display: block; margin: 0 auto; background: #fff; }
+        canvas {
+            background: #fff; 
+        }
+        #canvasWindTopBar {
+            background: #999999;
+            height: 20px;
+            width: 500px;
+        }
+        #canvasWind {
+            position: absolute;
+            left: 100px;
+            top: 150px;
+            border: 2px solid black;
+            width: 500px;
+        }
         </style>
     </head>
 
@@ -15,10 +29,11 @@
         <div class="container">
              <h1>Synthesizer!</h1>
             <p id="keyboard"></p>
-            <canvas id="mainCanvas" width="500px" height="200px" style="border: 2px solid black;"></canvas>
+            <div id="canvasWind"><div id="canvasWindTopBar">Canvas window</div><canvas id="mainCanvas" width="500px" height="200px"></canvas></div>
             <button id="play">play!</button>
         </div>
         <script src="synth.js"></script>
+        <script src="window.js"></script>
     </body>
 
 </html>

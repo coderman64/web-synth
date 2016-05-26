@@ -37,11 +37,15 @@ function redraw(){
     c.beginPath();
     c.fillStyle = "#FFFFFF";
     c.fillRect(0,0,canvas.width,canvas.height);
-    c.strokeStyle = "#000000";
     for(var i = 0; i < 20;i++){
+        c.strokeStyle = "#999999";
+        c.moveTo(i*20,0);
+        c.lineTo(i*20,canvas.height);
+        c.strokeStyle = "#000000";
         c.moveTo(0,i*10);
         c.lineTo(500,i*10);
         c.stroke();
+        c.beginPath();
     }
     for(var i = 0; i < notes.length; i++){
         notes[i].draw();
@@ -94,7 +98,7 @@ canvas.addEventListener("mousedown", function(evt){
     //c.fillStyle = "#000000";
     //c.fillRect(mouseLoc.x,Math.floor(mouseLoc.y/10)*10,50,10);
     //c.stroke();
-    notes[notes.length] = new note(Math.floor(mouseLoc.y/10)+30, mouseLoc.x, 10);
+    notes[notes.length] = new note(Math.floor(mouseLoc.y/10)+30, Math.round(mouseLoc.x/5)*5, 10);
     notes[notes.length-1].draw();
     osc.frequency.value = frequency;
     osc.type = 'triangle';
@@ -138,8 +142,6 @@ playbutton.addEventListener("click",function(){
         playbutton.innerHTML = "Stop!";//begins playback and changes the button text to "Stop!"
     }
 });
-
-
 
 canvas.oncontextmenu = function (e){
     e.preventDefault(); //prevents the canvas from pulling up a menu when right-clicked
