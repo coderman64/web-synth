@@ -29,7 +29,7 @@ var note = function(key, time, length){
 note.prototype.draw = function(){
     //(key-30)*10
     c.fillStyle = "#000000";
-    c.fillRect(this.time,(this.key-30)*10, this.length, 10);
+    c.fillRect(this.time,(this.key)*10, this.length, 10);
     c.stroke();
 }
 
@@ -37,13 +37,25 @@ function redraw(){
     c.beginPath();
     c.fillStyle = "#FFFFFF";
     c.fillRect(0,0,canvas.width,canvas.height);
-    for(var i = 0; i < 20;i++){
-        c.strokeStyle = "#999999";
+    for(var i = 0; i < Math.max(Math.floor(canvas.width/20),Math.floor(canvas.height/10));i++){
+        if(i/4==Math.floor(i/4)){
+            c.lineWidth = 2;
+        }else{
+            c.lineWidth = 1;
+        }
+        c.strokeStyle = "#000000";
         c.moveTo(i*20,0);
         c.lineTo(i*20,canvas.height);
+        c.stroke();
+        c.beginPath();
         c.strokeStyle = "#000000";
+        if((i-6)/12==Math.floor((i-6)/12)){
+            c.lineWidth = 2;
+        }else{
+            c.lineWidth = 1;
+        }
         c.moveTo(0,i*10);
-        c.lineTo(500,i*10);
+        c.lineTo(canvas.width,i*10);
         c.stroke();
         c.beginPath();
     }
@@ -63,7 +75,7 @@ function redraw(){
         if(notes[i].osc&&((play>(notes[i].time+notes[i].length)&&play<(notes[i].time+notes[i].length)+6)||play < 1)){
             notes[i].osc.stop(context.currentTime);
         }
-        var noteY = (notes[i].key-30)*10
+        var noteY = (notes[i].key)*10
         if(rightButton&&mouseLoc.x > notes[i].time&&mouseLoc.x<(notes[i].time+notes[i].length)&&mouseLoc.y>noteY&&mouseLoc.y<noteY+10){
             notes.splice(i,1);
             i--;
@@ -94,11 +106,11 @@ canvas.addEventListener("mousedown", function(evt){
     if(evt.button === 0){
     c.moveTo(mouseLoc.x,mouseLoc.y);
     var osc = context.createOscillator();
-    var frequency = getFreq(Math.floor(mouseLoc.y/10)+30);
+    var frequency = getFreq(Math.floor(mouseLoc.y/10));
     //c.fillStyle = "#000000";
     //c.fillRect(mouseLoc.x,Math.floor(mouseLoc.y/10)*10,50,10);
     //c.stroke();
-    notes[notes.length] = new note(Math.floor(mouseLoc.y/10)+30, Math.round(mouseLoc.x/5)*5, 10);
+    notes[notes.length] = new note(Math.floor(mouseLoc.y/10), Math.round(mouseLoc.x/5)*5, 10);
     notes[notes.length-1].draw();
     osc.frequency.value = frequency;
     osc.type = 'triangle';
@@ -123,7 +135,7 @@ var moved12 = function(evt){
        x: evt.clientX - rect.left,
        y: evt.clientY - rect.top
     }; //change the "mouseLoc" variable to reflect the mouse's current position
-    cont.innerHTML = "Key No. "+(Math.floor(mouseLoc.y/10)+30).toString();
+    cont.innerHTML = "Key No. "+(Math.floor(mouseLoc.y/10)).toString();
     if(mouseDown && evt.button == 0&& rightButton == false){
         if(notes[notes.length-1].time<mouseLoc.x){
             notes[notes.length-1].length = Math.round((mouseLoc.x-notes[notes.length-1].time)/5)*5;//allows you to drag out the length of the note

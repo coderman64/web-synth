@@ -13,14 +13,14 @@
         #canvasWindTopBar {
             background: #999999;
             height: 20px;
-            width: 500px;
+            width: 550px;
         }
         #canvasWind {
             position: absolute;
             left: 100px;
             top: 150px;
             border: 2px solid black;
-            width: 500px;
+            width: 550px;
         }
         body {
             overflow: hidden;
@@ -31,9 +31,12 @@
     <body>
         <div class="container">
              <h1>Synthesizer!</h1>
-            <p id="keyboard"></p>
-            <div id="canvasWind"><div id="canvasWindTopBar">Canvas window</div><canvas id="mainCanvas" width="500px" height="200px"></canvas></div>
-            <button id="play">play!</button>
+            <div id="canvasWind">
+                <div id="canvasWindTopBar">Canvas window</div>
+                <div style="overflow: scroll; height: 250px; width:550px;" id="canvasWindScroll"><canvas id="mainCanvas" width="600px" height="600px"></canvas></div>
+                <button id="play">play!</button><a id="keyboard"></a>
+            </div>
+            
         </div>
         <script src="synth.js"></script>
         <script src="window.js"></script>

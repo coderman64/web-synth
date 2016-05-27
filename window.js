@@ -7,12 +7,12 @@ var relativeLoc = {
 };
 
 windowBar.addEventListener("mousedown",function(evt){
-    dragging = true;
     var rect = canvas.getBoundingClientRect();
     relativeLoc = {
         x: evt.clientX - rect.left,
         y: evt.clientY - rect.top
 };
+    dragging = true;
 });
 
 windowBar.addEventListener("mouseup",function(){
