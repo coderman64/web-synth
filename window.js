@@ -1,4 +1,10 @@
-var windowObj = document.getElementById("canvasWind");
+var windowContainer = document.getElementById("canvasWind");
+console.log("NOODLEs");
+var windowObj = newWindObj(windowContainer, "synth window");
+var scriptElement12 = document.createElement("SCRIPT");
+document.body.appendChild(scriptElement12);
+scriptElement12.src = "synth.js";
+/*var windowObj = document.getElementById("canvasWind");
 var windowBar = document.getElementById("canvasWindTopBar");
 var dragging = false;
 var relativeLoc = {
@@ -24,4 +30,4 @@ document.body.addEventListener("mousemove",function(evt){
         windowObj.style.left = (evt.clientX-relativeLoc.x).toString()+"px";
         windowObj.style.top = (evt.clientY+relativeLoc.y).toString()+"px";
     }
-});
+});*/

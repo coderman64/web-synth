@@ -10,18 +10,6 @@
         canvas {
             background: #fff; 
         }
-        #canvasWindTopBar {
-            background: #999999;
-            height: 20px;
-            width: 550px;
-        }
-        #canvasWind {
-            position: absolute;
-            left: 100px;
-            top: 150px;
-            border: 2px solid black;
-            width: 550px;
-        }
         body {
             overflow: hidden;
         }
@@ -32,13 +20,12 @@
         <div class="container">
              <h1>Synthesizer!</h1>
             <div id="canvasWind">
-                <div id="canvasWindTopBar">Canvas window</div>
-                <div style="overflow: scroll; height: 250px; width:550px;" id="canvasWindScroll"><canvas id="mainCanvas" width="600px" height="600px"></canvas></div>
+                <div style="overflow: scroll; height: 250px; width:550px;" id="canvasWindScroll"><canvas id="mainCanvas" width="8000px" height="600px">It seems that your browser does not support canvas :-(</canvas></div>
                 <button id="play">play!</button><a id="keyboard"></a>
             </div>
             
         </div>
-        <script src="synth.js"></script>
+        <script src="webWind.js"></script>
         <script src="window.js"></script>
     </body>
 

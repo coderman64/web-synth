@@ -1,3 +1,8 @@
+var canvas = document.getElementById("mainCanvas");
+var cont = document.getElementById("keyboard");
+var c = canvas.getContext("2d");
+var rightButton = false;
+var notes = [];
 var myVar = window.setInterval(redraw , 100);
 var play = 0;
 var playbutton = document.getElementById("play");
@@ -13,13 +18,6 @@ var context = new (window.AudioContext || window.webkitAudioContext)(),
 masterVolume.gain.value = 0.2;
 
 masterVolume.connect(context.destination);
-
-var canvas = document.getElementById("mainCanvas");
-var cont = document.getElementById("keyboard");
-var c = canvas.getContext("2d");
-var rightButton = false;
-
-var notes = [];
 var note = function(key, time, length){
     this.key = key;
     this.time = time;
