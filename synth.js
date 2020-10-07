@@ -65,7 +65,7 @@ synthApp.prototype.mouseDown1 = function(evt){
                     this.resize = i;
             }
         }
-        if(this.resize == false){
+        if(this.resize == -1){
             var osc = context.createOscillator();
             var frequency = getFreq(Math.floor(this.mouseLoc.y/10));
             this.notes[this.notes.length] = new note(Math.floor(this.mouseLoc.y/10), Math.round(this.mouseLoc.x/5)*5, 10);
@@ -101,7 +101,7 @@ synthApp.prototype.mouseMove1 = function(evt){
     if(this.mouseDown && evt.button == 0&& this.rightButton == false){
         if(this.resize>-1){
             this.notes[this.resize].length = Math.round((this.mouseLoc.x-this.notes[this.resize].time)/5)*5;
-        }else if(this.notes[this.notes.length-1].time<this.mouseLoc.x){
+        }else if(this.notes.length > 0 && this.notes[this.notes.length-1].time<this.mouseLoc.x){
             this.notes[this.notes.length-1].length = Math.round((this.mouseLoc.x-this.notes[this.notes.length-1].time)/5)*5;//allows you to drag out the length of the note
         }
     }
@@ -128,9 +128,9 @@ synthApp.prototype.redraw = function(){
             this.c.lineWidth = 1;
         }
         
-        if(this.mouseLoc.x > this.notes[i].time&&this.mouseLoc.x<(this.notes[i].time+this.notes[i].length)&&this.mouseLoc.y>noteY&&this.mouseLoc.y<noteY+10){
-            this.notes[i].length = Math.ceil((this.mouseLoc.x-this.notes[i].time)/5)*5;
-        }
+        // if(this.mouseLoc.x > this.notes[i].time&&this.mouseLoc.x<(this.notes[i].time+this.notes[i].length)&&this.mouseLoc.y>noteY&&this.mouseLoc.y<noteY+10){
+        //     this.notes[i].length = Math.ceil((this.mouseLoc.x-this.notes[i].time)/5)*5;
+        // }
         this.c.strokeStyle = "#000000";
         this.c.moveTo(i*20,0);
         this.c.lineTo(i*20,this.canvas.height);
